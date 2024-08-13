@@ -88,8 +88,6 @@ void TrayMenu::addClipboardItemAction(const QModelIndex &index, bool showImages,
     if ( m_clipboardItemActionCount == 0 && m_searchText.isEmpty() ) {
       if (m_viMode) {
         setSearchMenuItem( tr("Press '/' to search") );
-      } else if (m_emacsMode) {
-        setSearchMenuItem( tr("Press 'Ctrl + s' to search") );
       } else {
         setSearchMenuItem( tr("Type to search") );
       }
@@ -238,8 +236,6 @@ void TrayMenu::keyPressEvent(QKeyEvent *event)
             // Type text for search.
             if ( (m_clipboardItemActionCount > 0 || !m_searchText.isEmpty())
                  && (!m_viMode || !m_searchText.isEmpty() || key == Qt::Key_Slash)
-                 && (!m_emacsMode || !m_searchText.isEmpty() ||
-                     ((key == Qt::Key_S) && (mods & Qt::ControlModifier)))
                  && !event->modifiers().testFlag(Qt::AltModifier)
                  && !event->modifiers().testFlag(Qt::ControlModifier) )
             {
@@ -324,8 +320,7 @@ void TrayMenu::search(const QString &text)
         return;
 
     m_searchText = text;
-    emit searchRequest(
-      (m_viMode || m_emacsMode) ? m_searchText.mid(1) : m_searchText);
+    emit searchRequest(m_viMode ? m_searchText.mid(1) : m_searchText);
 }
 
 void TrayMenu::markItemInClipboard(const QVariantMap &clipboardData)

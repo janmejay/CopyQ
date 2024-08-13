@@ -1991,13 +1991,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
       if (browseMode()) {
         if (c && handleEmacsKey(event, c))
-          return;
-
-        if (key == Qt::Key_S && modifiers == Qt::ControlModifier) {
-          enterSearchMode();
-          event->accept();
-          return;
-        }
+            return;
       }
     }
 

@@ -529,17 +529,19 @@ bool handleEmacsKey(QKeyEvent *event, QObject *eventReceiver)
       break;
     }
     return false;
-  case Qt::Key_Comma:
-    if ((mods & Qt::ControlModifier) && (mods & Qt::ShiftModifier)) {
+  case Qt::Key_Less:
+    if ((mods & Qt::AltModifier)) {
       key = Qt::Key_Home;
-      mods = mods & ~(Qt::ShiftModifier || Qt::ControlModifier);
+      mods = mods & ~(Qt::ShiftModifier | Qt::AltModifier);
+			break;
     } else {
       return false;
     }
-  case Qt::Key_Stop:
-    if ((mods & Qt::ControlModifier) && (mods & Qt::ShiftModifier)) {
+  case Qt::Key_Greater:
+    if ((mods & Qt::AltModifier)) {
       key = Qt::Key_End;
-      mods = mods & ~(Qt::ShiftModifier || Qt::ControlModifier);
+      mods = mods & ~(Qt::ShiftModifier | Qt::AltModifier);
+			break;
     } else {
       return false;
     }
